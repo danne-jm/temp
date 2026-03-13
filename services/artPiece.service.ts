@@ -1,5 +1,5 @@
 // Export the function directly using a Named Export
-export const getAllSellables = async () => {
+export const getAllProducts = async () => {
     return [{ id: 1, title: "Mona Lisa" }, { id: 2, title: "Starry Night" }];
 };
 

@@ -5,13 +5,17 @@
   "type": "commonjs",
   "scripts": {
     "render": "ts-node pages/index.ts",
-    "migrate": "ts-node migrate.ts"
+    "migrate": "ts-node migrate.ts",
+    "codemod:rename": "jscodeshift -t migration/jscodeshift/rename-method.ts services pages --extensions=ts,tsx --parser=ts"
   },
   "dependencies": {
-    "ts-morph": "^22.0.0"
+    "ts-morph": "^22.0.0",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@types/uuid": "^10.0.0",
+    "jscodeshift": "^0.16.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
