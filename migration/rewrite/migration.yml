@@ -14,3 +14,5 @@ recipeList:
 # mod config recipes jar install org.openrewrite:rewrite-java:8.75.3
 # mod build .
 # mod run . --recipe be.belfius.RenameGetAllProducts
+
+#https://github.com/openrewrite/rewrite/blob/main/rewrite-java/src/main/java/org/openrewrite/java/ChangeMethodName.java
