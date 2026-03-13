@@ -1,0 +1,29 @@
+    
+    
+    
+    
+    OpenRewrite                 -               Ts Morph
+    
+    Cross language support                      Uses TS compiler directly. 
+    Preserves formatting, comments by default   Most accurate you can get for TS codemods. OR can achieve same accuracy/complexity, but the "ultimate" recipes will be more effort to write, but reusable thereafter.
+    Built in Diff/Dry run feature               NPM package.
+    Built in step builder (yaml)                Way faster to execute.
+                                                May lose formatting/comments? Should run a formatter after execution... I never experienced it myself but keep reading about that, same problem wiht Jscodeshift. OR solved it!
+                                                
+    OR: Advertised as a tool for fast, large scale, cross repo migrations, but this is mainly via moderne platform, so we wouldn't benefit from that, which is fine...    
+    --> We'd be using both tools identically, reusable scripts, individually ran once renovate updates, no platform to manually select repos and apply recipes at scale like SaaS, which isn't what we want anyway. 
+    
+    Based on rewrite repository docs for JS/TS, latest release has:
+    - ✅ Basic TypeChecker integration via `ts.createProgram()` and `program.getTypeChecker()`
+    - ✅ Primitive type mapping (boolean, number, string, void, null, undefined, bigint)
+    - ✅ RegExp type mapping (mapped to String)
+    - ✅ Proper numeric literal parsing (integers, floats, bigint)
+    - ✅ Search result marker integration for type testing
+    - ⚠️ Incomplete `variableType()` method
+    --------------------------------------------------------------------
+    - ❌ No class/interface type support
+    - ❌ No method/function type support
+    - ❌ No array/tuple type support
+    - ❌ No union/intersection type support (basic test passes but full support not implemented)
+    - ❌ No generic type support
+    - ❌ No JSX/React component type support
