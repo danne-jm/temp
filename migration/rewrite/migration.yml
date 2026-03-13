@@ -1,0 +1,21 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: be.belfius.RenameGetAllProducts
+displayName: Rename getAllProducts to getAllSellables
+description: Renames occurrences of the getAllProducts method to getAllSellables.
+recipeList:
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: '*..* getAllProducts(..)'
+      newMethodName: getAllSellables
+      matchOverrides: false
+  # Add this text replacement recipe to catch the const declaration and exports
+  - org.openrewrite.text.FindAndReplace:
+      find: getAllProducts
+      replace: getAllSellables
+      filePattern: '**/*.ts, **/*.tsx' # Limit to TS/TSX files
+
+# add javascript support in moderne cli 
+# mod config recipes yaml install migration/rewrite/migration.yml
+# mod config recipes jar install org.openrewrite:rewrite-java:8.75.3
+# mod build .
+# mod run . --recipe be.belfius.RenameGetAllProducts
