@@ -29,3 +29,5 @@ if (!targetDeclaration) {
 project.saveSync();
 
 console.log('Migration complete! Check your files.');
+
+// npx ts-node migration/tsmorph/rename-method.ts
