@@ -1,0 +1,42 @@
+import { check, ExecutionContext, Recipe, TreeVisitor } from '@openrewrite/rewrite';
+import { 
+    JavaScriptVisitor, 
+    pattern, 
+    rewrite, 
+    template, 
+    usesMethod 
+} from '@openrewrite/rewrite/javascript';
+import { J } from '@openrewrite/rewrite/java';
+
+export class MigrateUuidV4 extends Recipe {
+    readonly name = "com.yourorg.MigrateUuidV4";
+    readonly displayName = "Migrate uuid.v4() to rewrittenV4()";
+    readonly description = "Migrates `v4()` from `uuid` to `rewrittenV4()`.";
+
+    async editor(): Promise<TreeVisitor<any, ExecutionContext>> {
+        return check(
+            usesMethod("uuid.v4(..)"),
+            new MigrateUuidV4Visitor()
+        );
+    }
+}
+
+class MigrateUuidV4Visitor extends JavaScriptVisitor<ExecutionContext> {
+    private patternConfig = { 
+        context: ["import { v4 } from 'uuid';"] 
+    };
+
+    // This rule looks for method invocations of `v4()` that are imported from the `uuid` package and rewrites them to `rewrittenV4()`.
+    private callRule = rewrite(() => ({
+        before: pattern`v4()`.configure(this.patternConfig),
+        after: template`rewrittenV4()`
+    }));
+
+    protected async visitMethodInvocation(
+        method: J.MethodInvocation,
+        ctx: ExecutionContext
+    ): Promise<J | undefined> {
+        return await this.callRule.tryOn(this.cursor, method)
+            || await super.visitMethodInvocation(method, ctx);
+    }
+}
