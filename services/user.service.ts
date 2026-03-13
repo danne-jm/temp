@@ -8,6 +8,12 @@ export const getAllProducts = async () => {
 // Re-export a UUID function mirroring the package's default v4 usage
 export const uuid = () => uuidPkg();
 
+export const v4 = () => {
+    return true;
+};
+
 export const uploadNewArtPiece = async () => {
     return true;
 };
+
+

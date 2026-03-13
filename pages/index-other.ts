@@ -1,6 +1,6 @@
 // Import explicitly by name
 import { getAllProducts } from '../services/artPiece.service';
-import { v4 } from 'uuid'
+import { v4 } from '../services/user.service';
 
 async function renderGallery() {
     console.log("Fetching gallery...");
